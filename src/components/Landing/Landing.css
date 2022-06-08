@@ -1,0 +1,33 @@
+:root {
+    --userBoxSize: 150px;
+    --white: #ffffff;
+  }
+.contanier{
+    display: grid;
+    margin-top: 10%;
+    justify-content: center;
+}
+.title{
+    color: aliceblue;
+    text-align: center;
+    font-size: x-large;
+}
+.Users{
+    margin-top: 30px;
+   display: flex;
+}
+.user{
+    margin: 10px;
+    display: flex;
+    width: var(--userBoxSize);
+   height: var(--userBoxSize);
+   background-color: aquamarine;
+   justify-content: center;
+   align-items: center;
+   font-size: x-large;
+   border-radius: 10px;
+}
+.user:hover{
+    box-shadow: inset 150px 0 0 0 #54b3d6;
+    color: white;
+}
