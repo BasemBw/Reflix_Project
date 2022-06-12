@@ -33,8 +33,15 @@ class Catalog extends Component {
     let thereRented = false
     let rentedMovies = []
     let nonRentedMovies = []
-    rentedMovies = this.state.moviesList.filter(movie => movie.isRented)
-    nonRentedMovies = this.state.moviesList.filter(movie => !movie.isRented)
+    let movies = this.props.movies
+    rentedMovies = this.props.userData.rented
+    rentedMovies.forEach(element => {
+        movies = movies.filter(movie => movie.id !== element.id)
+    });
+    nonRentedMovies = [...movies]
+    if(rentedMovies.length === 0){
+      nonRentedMovies = [...movies]
+    }
     if (rentedMovies.length === 0) { thereRented = true }
     return (
       <div className='container'>
@@ -43,7 +50,7 @@ class Catalog extends Component {
             <input value={this.state.search} placeholder="Enter movie name :" onChange={this.handelChangeEvent} />
           </div>
           <div className='budget'>
-            <span>Budget:$</span>
+            <span>Budget:${this.props.userData.budget}</span>
           </div>
         </div>
         <div className='MoviesCatalog'>
@@ -52,7 +59,7 @@ class Catalog extends Component {
             <div className='rentedMovies'>
               {rentedMovies.map(movie => {
                 return (
-                  <Movie key={movie.id} changeRented={this.props.changeRented} movie={movie} />
+                  <Movie key={movie.id} flag="-" userName={this.props.userName} changeRented={this.props.changeRented} movie={movie} />
                 )
               })}
             </div>
@@ -61,7 +68,7 @@ class Catalog extends Component {
           <div className='Movies'>
             {nonRentedMovies.map(movie => {
               return (
-                <Movie key={movie.id} changeRented={this.props.changeRented} movie={movie} />
+                <Movie key={movie.id} flag="+" userName={this.props.userName} changeRented={this.props.changeRented} movie={movie} />
               )
             })}
           </div>

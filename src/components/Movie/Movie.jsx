@@ -1,17 +1,21 @@
-import React, { Component } from 'react'
-import  {Link} from 'react-router-dom'
+import React, { Component , Fragment} from 'react'
+import { Link } from 'react-router-dom'
+import './Movie.css'
 
 export class Movie extends Component {
   updateRented = () => {
-    this.props.changeRented(this.props.movie.id)  
-  } 
+    this.props.changeRented(this.props.movie.id,this.props.userName)
+  }
+
   render() {
     let params = this.props
     return (
-          <div key={params.movie.id} className='movie'>
-                <Link to={`/catalog/${this.props.movie.id}`}  ><img alt={params.movie.title} src={params.movie.img} /></Link>
-                <button onClick={this.updateRented} >{params.movie.isRented ? "-" : "+"}</button>
+        <Fragment>
+          <div className='movieCard'>
+          <Link to={`/catalog/${this.props.movie.id}`}><div className='movieImg' style={{backgroundImage: `url("${params.movie.img}")`}}></div></Link> 
+            <button className='addButton' onClick={this.updateRented} >{params.flag}</button>
           </div>
+        </Fragment>
     )
   }
 }
